@@ -9,11 +9,12 @@ from subprocess import run
 def main(f, s):
 	compiler=""
 	PRINT_ICON()
+	print(f+" output -->\n")
 	if s == 0:
 		compiler = "gcc"
 	elif s == 1:
 		compiler = "g++"
-	#runner(compiler)
+	runner(compiler, f)
 	return 0
 
 def isValid(f):
@@ -29,14 +30,18 @@ def isValid(f):
 	return done
 
 def PRINT_ICON():
-	print(r"""
+	print("""
  _ __ _   _ _ __   ___ ___ 
 | '__| | | | '_ \ / __/ __|
 | |  | |_| | | | | (_| (__ 
 |_|   \__,_|_| |_|\___\___|
 	""")
 	print("============================")
-	print("output:")
+	
+def runner(c, f):
+	run([c,"-Wall",f])
+	run(["./a.out"])
+	run(["rm", "a.out"])
 	
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description="Simple execute source code C/C++")
