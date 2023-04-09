@@ -6,8 +6,15 @@ from os import path
 from subprocess import run
 
 # -- defined main function
-def main():
-	pass
+def main(f, s):
+	compiler=""
+	#PRINT_ICON()
+	if s == 0:
+		compiler = "gcc"
+	elif s == 1:
+		compiler = "g++"
+	#runner(compiler)
+	return 0
 
 def isValid(f):
 	done = -1
