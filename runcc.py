@@ -2,12 +2,20 @@
 
 # --- Import module and method
 import argparse
-from os import path
+from os import path, name
 from subprocess import run
+from colorama import init, Fore, Style
+
+# -- declare constant
+FC = Fore.CYAN
+SR = Style.RESET_ALL
 
 # -- defined main function
 def main(f, s):
 	compiler=""
+	
+	if isWindows(): init(convert=True) #colorama
+	
 	PRINT_ICON()
 	print(f+" output -->\n")
 	if s == 0:
@@ -30,19 +38,26 @@ def isValid(f):
 	return done
 
 def PRINT_ICON():
-	print("""
+	print(FC+r"""
  _ __ _   _ _ __   ___ ___ 
 | '__| | | | '_ \ / __/ __|
 | |  | |_| | | | | (_| (__ 
 |_|   \__,_|_| |_|\___\___|
 	""")
-	print("============================")
+	print("============================"+SR)
 	
 def runner(c, f):
 	run([c,"-Wall",f])
 	run(["./a.out"])
 	run(["rm", "a.out"])
-	
+
+def isWindows():
+	done = False
+	if name != 'posix': #!=
+		print(name)
+		done = True
+	return done
+
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description="Simple execute source code C/C++")
 	parser.add_argument("filename", type=str, help="filename of the source code C/C++")
