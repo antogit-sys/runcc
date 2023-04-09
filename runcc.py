@@ -9,9 +9,26 @@ from subprocess import run
 def main():
 	pass
 
+def isValid(f):
+	done = -1
+	ext = f.split(".")[-1] #get extension
+	
+	#in --> multiple or
+	if ext in ["c","cxx","cc","C"]: 
+		done = 0
+	elif ext in ["cpp","CPP"]:
+		done = 1
+	
+	return done
+
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description="Simple execute source code C/C++")
 	parser.add_argument("filename", type=str, help="filename of the source code C/C++")
 	args = parser.parse_args()
-	
-
+	status = isValid(args.filename)
+	done = -1
+	if status in[0,1] and path.isfile(args.filename):
+		done = main(args.filename,status)
+	else:
+		print("runcc: oops, something went wrong...")
+	exit(done)
