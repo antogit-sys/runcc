@@ -8,7 +8,7 @@ from subprocess import run
 # -- defined main function
 def main(f, s):
 	compiler=""
-	#PRINT_ICON()
+	PRINT_ICON()
 	if s == 0:
 		compiler = "gcc"
 	elif s == 1:
@@ -28,6 +28,16 @@ def isValid(f):
 	
 	return done
 
+def PRINT_ICON():
+	print(r"""
+ _ __ _   _ _ __   ___ ___ 
+| '__| | | | '_ \ / __/ __|
+| |  | |_| | | | | (_| (__ 
+|_|   \__,_|_| |_|\___\___|
+	""")
+	print("============================")
+	print("output:")
+	
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description="Simple execute source code C/C++")
 	parser.add_argument("filename", type=str, help="filename of the source code C/C++")
