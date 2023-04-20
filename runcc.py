@@ -4,18 +4,12 @@
 import argparse
 from os import path, name
 from subprocess import run
-from colorama import init, Fore, Style
 
-# -- declare constant
-FC = Fore.CYAN
-SR = Style.RESET_ALL
 
 # -- defined main function
 def main(f, s):
 	compiler=""
-	
-	if isWindows(): init(convert=True) #colorama
-	
+
 	PRINT_ICON()
 	print(f+" output -->\n")
 	if s == 0:
@@ -38,6 +32,14 @@ def isValid(f):
 	return done
 
 def PRINT_ICON():
+	FC = ""
+	SR = ""
+	if isPosix():
+		from colorama import Fore, Style
+		# -- declare constant
+		FC = Fore.CYAN
+		SR = Style.RESET_ALL
+		
 	print(FC+r"""
  _ __ _   _ _ __   ___ ___ 
 | '__| | | | '_ \ / __/ __|
@@ -51,10 +53,9 @@ def runner(c, f):
 	run(["./a.out"])
 	run(["rm", "a.out"])
 
-def isWindows():
+def isPosix():
 	done = False
-	if name != 'posix': #!=
-		print(name)
+	if name == 'posix':
 		done = True
 	return done
 
